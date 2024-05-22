@@ -1,13 +1,8 @@
 import yfinance as yf
-import logging
+from utils.logger import setup_logger
 from tracker.model.criteria import Criteria
 
-logging.basicConfig(
-    filemode="a",
-    level=logging.DEBUG,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
-
+logger = setup_logger()
 
 def get_price(ticker: str):
     t = yf.Ticker(ticker)

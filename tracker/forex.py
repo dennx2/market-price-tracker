@@ -3,15 +3,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-import time, logging
+import time
+from utils.logger import setup_logger
 
-
-logging.basicConfig(
-    filemode="a",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
-
+logger = setup_logger()
 
 def google_exchange_rate(currency_pair) -> str | None:
     # Setup the webdriver
@@ -45,14 +40,14 @@ def google_exchange_rate(currency_pair) -> str | None:
 
         # Print the exchange rate
         if exchange_rate:
-            logging.info(f"The exchange rate is: {exchange_rate}")
+            logger.info(f"The exchange rate is: {exchange_rate}")
             return exchange_rate
         else:
-            logging.warning("Exchange rate attribute not found in the element")
+            logger.warning("Exchange rate attribute not found in the element")
             return None
 
     except Exception as e:
-        logging.error("An error occurred in google_exchange_rate", exc_info=True)
+        logger.error("An error occurred in google_exchange_rate", exc_info=True)
         return None
 
     finally:
