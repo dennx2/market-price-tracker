@@ -4,9 +4,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
-from utils.logger import setup_logger
+from ..utils.logger import setup_logger
 
 logger = setup_logger()
+
 
 def google_exchange_rate(currency_pair) -> str | None:
     # Setup the webdriver

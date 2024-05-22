@@ -1,4 +1,5 @@
 import logging
+import os
 
 
 def setup_logger() -> logging.Logger:
@@ -11,13 +12,14 @@ def setup_logger() -> logging.Logger:
 
     # Create a module-level logger
     logger = logging.getLogger(__name__)
+    log_directory = "logs"
 
     # Create handlers for different log levels
     # Define file paths for each log level
-    info_handler = logging.FileHandler("info.log")
+    info_handler = logging.FileHandler(os.path.join(log_directory, "info.log"))
     info_handler.setLevel(logging.INFO)
 
-    error_handler = logging.FileHandler("error.log")
+    error_handler = logging.FileHandler(os.path.join(log_directory, "error.log"))
     error_handler.setLevel(logging.ERROR)
 
     # Define formatters for the handlers
