@@ -8,10 +8,10 @@ load_dotenv()
 # Access the variables
 chat_id = os.getenv("CHAT_ID")
 
-from src.tracker.forex import google_exchange_rate
-from src.utils.compose_message import compose_message
-from src.utils.send_notification import send_notification
-from src.tracker.model.criteria import Criteria
+from tracker.forex.get_current_rate import google_exchange_rate
+from tracker.forex.compose_message import compose_message
+from tracker.forex.send_notification import send_notification
+from tracker.model.criteria import Criteria
 
 forex_alert: Criteria = {
     "ticker": "CADTWD=X",

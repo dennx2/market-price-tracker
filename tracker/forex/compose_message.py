@@ -1,4 +1,4 @@
-from ..tracker.model.criteria import Criteria
+from ..model.criteria import Criteria
 
 
 # forex_alert = {"ticker": "CADTWD=X", "condition": "below", "price_threshold": 23.5}

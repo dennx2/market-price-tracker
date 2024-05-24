@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 import requests
-from .logger import setup_logger
+from ..utils.logger import setup_logger
 
 # Load the .env file
 load_dotenv()
