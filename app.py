@@ -15,7 +15,7 @@ from tracker.model.criteria import Criteria
 
 forex_alert: Criteria = {
     "ticker": "CADTWD=X",
-    "condition": "above",
+    "condition": "below",
     "price_threshold": "23.5",
 }
 
