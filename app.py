@@ -8,20 +8,20 @@ load_dotenv()
 # Access the variables
 chat_id = os.getenv("CHAT_ID")
 
-from tracker.forex.get_current_rate import google_exchange_rate
-from tracker.forex.compose_message import compose_message
-from tracker.forex.send_notification import send_notification
-from tracker.model.criteria import Criteria
+from tracker.model.criteria import Price_Criteria
+from tracker.forex.get_data import google_exchange_rate
+from tracker.utils.compose_message import *
+from tracker.utils.send_notification import send_to_telegram
 
-forex_alert: Criteria = {
-    "ticker": "CADTWD=X",
+forex_alert_criteria: Price_Criteria = {
+    "ticker": "CADTWD",
     "condition": "below",
-    "price_threshold": "23.5",
+    "price_threshold": 23.5,
 }
 
-current_rate = google_exchange_rate("cadtwd")
+current_rate = google_exchange_rate(forex_alert_criteria["ticker"])
 if current_rate:
-    msg = compose_message(current_rate, forex_alert)
+    msg = compose_price_alert(current_rate, forex_alert_criteria)
 
     if msg and chat_id:
-        send_notification(chat_id, msg)
+        send_to_telegram(chat_id, msg)

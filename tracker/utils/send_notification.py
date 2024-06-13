@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 import requests
-from ..utils.logger import setup_logger
+from .logger import setup_logger
 
 # Load the .env file
 load_dotenv()
@@ -14,7 +14,7 @@ TELEGRAM_BASE_URL = "https://api.telegram.org/bot"
 logger = setup_logger()
 
 
-def send_notification(chat_id: str, message: str) -> None:
+def send_to_telegram(chat_id: str, message: str) -> None:
     """Function to send a notification to Telegram"""
 
     # Telegram API endpoint for sending messages

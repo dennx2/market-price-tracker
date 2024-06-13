@@ -18,6 +18,7 @@ def google_exchange_rate(currency_pair: str) -> float | None:
     service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Run headless Chrome
+    options.add_argument("--incognito")  # Run in incognito mode
     driver = webdriver.Chrome(service=service, options=options)
 
     try:
