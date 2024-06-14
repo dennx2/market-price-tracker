@@ -5,7 +5,7 @@ import os
 def setup_logger() -> logging.Logger:
     # Set up the root logger with the desired configuration
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format="%(asctime)s - %(levelname)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )

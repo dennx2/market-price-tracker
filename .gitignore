@@ -6,3 +6,6 @@ __pycache__/
 
 # Ignore log folder and its contents
 logs/
+
+# Environment variables
+.env

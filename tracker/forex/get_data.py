@@ -9,11 +9,16 @@ from ..utils.logger import setup_logger
 logger = setup_logger()
 
 
-def google_exchange_rate(currency_pair) -> str | None:
+def google_exchange_rate(currency_pair: str) -> float | None:
+    """
+    Get currency exchange rate through google search
+    """
+
     # Setup the webdriver
     service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Run headless Chrome
+    options.add_argument("--incognito")  # Run in incognito mode
     driver = webdriver.Chrome(service=service, options=options)
 
     try:
@@ -42,6 +47,7 @@ def google_exchange_rate(currency_pair) -> str | None:
         # Print the exchange rate
         if exchange_rate:
             logger.info(f"The exchange rate is: {exchange_rate}")
+            exchange_rate = float(exchange_rate)
             return exchange_rate
         else:
             logger.warning("Exchange rate attribute not found in the element")
@@ -54,7 +60,3 @@ def google_exchange_rate(currency_pair) -> str | None:
     finally:
         # Close the driver
         driver.quit()
-
-
-if __name__ == "__main__":
-    google_exchange_rate("cadtwd")
