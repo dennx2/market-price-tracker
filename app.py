@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
 
-
 # Load the .env file
 load_dotenv()
 
@@ -19,9 +18,14 @@ forex_alert_criteria: Price_Criteria = {
     "price_threshold": 23.5,
 }
 
-current_rate = google_exchange_rate(forex_alert_criteria["ticker"])
-if current_rate:
-    msg = compose_price_alert(current_rate, forex_alert_criteria)
 
-    if msg and chat_id:
-        send_to_telegram(chat_id, msg)
+def main():
+    current_rate = google_exchange_rate(forex_alert_criteria["ticker"])
+    if current_rate:
+        msg = compose_price_alert(current_rate, forex_alert_criteria)
+
+        if msg and chat_id:
+            send_to_telegram(chat_id, msg)
+
+
+main()
