@@ -9,6 +9,6 @@ class Price_Criteria(TypedDict):
 
 class Stoch_Criteria(TypedDict):
     ticker: str
-    condition: Literal["above", "below"]
-    K_threshold: int
-    D_threshold: int
+    speed: Literal["slow", "fast"]
+    overbought_threshold: int
+    oversold_threshold: int

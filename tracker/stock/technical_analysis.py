@@ -1,4 +1,3 @@
-from typing import Literal
 from stock_indicators import indicators
 from stock_indicators.indicators.common.quote import Quote
 from stock_indicators.indicators.common.enums import CandlePart
@@ -11,9 +10,7 @@ from ..utils.logger import setup_logger
 logger = setup_logger()
 
 
-def run_stoch(
-    quotes: list[Quote], speed: Literal["slow", "fast"] = "slow"
-) -> StochResult:
+def run_stoch(quotes: list[Quote], speed="slow") -> StochResult:
 
     if speed == "slow":
         smooth_periods = 3
