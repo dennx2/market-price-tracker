@@ -25,26 +25,31 @@ def run_stoch(quotes: list[Quote], speed="slow") -> StochResult:
         ma_type=MAType.SMA,
     )
 
-    return results[-1]
+    result = results[-1]
+    if result.k and result.d:
+        logger.info(f"K:{result.k:.2f} | D:{result.d:.2f}")
+    else:
+        logger.error(f"Failed to calculate Stochastic KD.")
+    return result
 
 
 def run_sma(
     quotes: list[Quote], periods: int, candle_part: CandlePart = CandlePart.CLOSE
 ) -> SMAResult:
 
-    if periods >= len(quotes):
-        logger.error(
-            f"The number of periods ({periods}) must be less than the number of quotes ({len(quotes)})."
-        )
-        raise ValueError(f"Something wrong with sma calculation.")
+    # if periods >= len(quotes):
+    #     logger.error(
+    #         f"The number of periods ({periods}) must be less than the number of quotes ({len(quotes)})."
+    #     )
+    #     raise ValueError(f"Something wrong with sma calculation.")
 
     results = indicators.get_sma(
         quotes, lookback_periods=periods, candle_part=candle_part
     )
-    if not results:
-        logger.error(
-            f"No SMA results returned for periods={periods}, candle_part={candle_part}."
-        )
-        raise ValueError("Failed to calculate SMA.")
 
-    return results[-1]
+    result = results[-1]
+    if result.sma:
+        logger.info(f"SMA was ${result.sma:.2f}")
+    else:
+        logger.error(f"Failed to calculate SMA.")
+    return result

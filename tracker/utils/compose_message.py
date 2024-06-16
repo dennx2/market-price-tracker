@@ -25,12 +25,16 @@ def compose_stoch_alert(current_stoch: StochResult, criteria: Stoch_Criteria) ->
     overbought_threshold = criteria["overbought_threshold"]
     oversold_threshold = criteria["oversold_threshold"]
 
-    if current_stoch.k < oversold_threshold and current_stoch.d < oversold_threshold:
-        message = f"Stock ticker {ticker} is oversold. K:{current_stoch.k:.2f} | D:{current_stoch.d:.2f}"
-    # elif (
-    #     current_stoch.k > overbought_threshold
-    #     and current_stoch.d > overbought_threshold
-    # ):
-    #     message = f"Stock ticker {ticker} is overbought. K:{current_stoch.k:.2f} | D:{current_stoch.d:.2f}"
+    k = current_stoch.k
+    d = current_stoch.d
+
+    if k and d:
+        if k < oversold_threshold and d < oversold_threshold:
+            message = f"Stock ticker {ticker} is oversold. K:{k:.2f} | D:{d:.2f}"
+        # elif (
+        #     current_stoch.k > overbought_threshold
+        #     and current_stoch.d > overbought_threshold
+        # ):
+        #     message = f"Stock ticker {ticker} is overbought. K:{current_stoch.k:.2f} | D:{current_stoch.d:.2f}"
 
     return message
