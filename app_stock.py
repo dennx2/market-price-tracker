@@ -30,7 +30,7 @@ def main():
     df = get_data(stoch_alert_criteria["ticker"], period="3mo")
     quotes = transform_data_to_quotes(df)
 
-    stoch_result = run_stoch(quotes, stoch_alert_criteria["speed"])
+    stoch_result = run_stoch(quotes, smoothK=stoch_alert_criteria["speed"])
     if stoch_result:
         msg = compose_stoch_alert(stoch_result, stoch_alert_criteria)
 

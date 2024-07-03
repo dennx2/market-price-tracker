@@ -10,18 +10,22 @@ from ..utils.logger import setup_logger
 logger = setup_logger()
 
 
-def run_stoch(quotes: list[Quote], speed="slow") -> StochResult:
+def run_stoch(
+    quotes: list[Quote], periodK=14, smoothD=3, smoothK="slow"
+) -> StochResult:
 
-    if speed == "slow":
+    if smoothK == "slow":
         smooth_periods = 3
     else:
         smooth_periods = 1
 
     results = indicators.get_stoch(
         quotes,
-        lookback_periods=14,
-        signal_periods=3,
+        lookback_periods=periodK,
+        signal_periods=smoothD,
         smooth_periods=smooth_periods,
+        k_factor=1,
+        d_factor=1,
         ma_type=MAType.SMA,
     )
 
