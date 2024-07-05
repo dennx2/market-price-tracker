@@ -18,24 +18,49 @@ from tracker.utils.send_notification import send_to_telegram
 
 # sma_result = run_sma(quotes, 60)
 
-stoch_alert_criteria: Stoch_Criteria = {
+stoch_00929: Stoch_Criteria = {
     "ticker": "00929.TW",
     "speed": "fast",
     "overbought_threshold": 80,
     "oversold_threshold": 20,
 }
 
+stoch_00934: Stoch_Criteria = {
+    "ticker": "00934.TW",
+    "speed": "fast",
+    "overbought_threshold": 80,
+    "oversold_threshold": 20,
+}
+
+stoch_00936: Stoch_Criteria = {
+    "ticker": "00936.TW",
+    "speed": "fast",
+    "overbought_threshold": 80,
+    "oversold_threshold": 20,
+}
+
+stoch_00940: Stoch_Criteria = {
+    "ticker": "00940.TW",
+    "speed": "fast",
+    "overbought_threshold": 80,
+    "oversold_threshold": 20,
+}
+
+criterias: list[Stoch_Criteria] = [stoch_00929, stoch_00934, stoch_00936, stoch_00940]
+
 
 def main():
-    df = get_data(stoch_alert_criteria["ticker"], period="3mo")
-    quotes = transform_data_to_quotes(df)
 
-    stoch_result = run_stoch(quotes, smoothK=stoch_alert_criteria["speed"])
-    if stoch_result:
-        msg = compose_stoch_alert(stoch_result, stoch_alert_criteria)
+    for critera in criterias:
+        df = get_data(critera["ticker"], period="3mo")
+        quotes = transform_data_to_quotes(df)
 
-        if msg and chat_id:
-            send_to_telegram(chat_id, msg)
+        stoch_result = run_stoch(quotes, smoothK=critera["speed"])
+        if stoch_result:
+            msg = compose_stoch_alert(stoch_result, critera)
+
+            if msg and chat_id:
+                send_to_telegram(chat_id, msg)
 
 
 main()

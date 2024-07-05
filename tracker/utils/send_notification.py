@@ -21,7 +21,7 @@ def send_to_telegram(chat_id: str, message: str) -> None:
     telegram_api_url = f"{TELEGRAM_BASE_URL}{bot_token}/sendMessage"
 
     # Set up the message parameters
-    params = {"chat_id": chat_id, "text": message}
+    params = {"chat_id": chat_id, "text": message, "parse_mode": "HTML"}
 
     # Send the message using the requests library
     response = requests.post(telegram_api_url, params=params)
@@ -33,5 +33,7 @@ def send_to_telegram(chat_id: str, message: str) -> None:
         logger.error(
             f"Failed to send Telegram notification. Status code: {response.status_code}"
         )
+        if response.text:
+            logger.debug(f"Response content: {response.text}")
 
     return None
