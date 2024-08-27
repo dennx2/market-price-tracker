@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-import time
+import time, os
 from ..utils.logger import setup_logger
 
 logger = setup_logger()
@@ -15,7 +15,12 @@ def google_exchange_rate(currency_pair: str) -> float | None:
     """
 
     # Setup the webdriver
-    service = Service(ChromeDriverManager().install())
+    chrome_install = ChromeDriverManager().install()
+
+    folder = os.path.dirname(chrome_install)
+    chromedriver_path = os.path.join(folder, "chromedriver.exe")
+
+    service = Service(chromedriver_path)
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")  # Run headless Chrome
     options.add_argument("--incognito")  # Run in incognito mode
