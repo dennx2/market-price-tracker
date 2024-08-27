@@ -9,3 +9,6 @@ logs/
 
 # Environment variables
 .env
+
+# Ignore Visual Studio Code settings directory
+.vscode/
